@@ -1,1 +1,1 @@
-# mortgage_lending_sql
+# lending_club_sql
