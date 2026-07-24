@@ -1,5 +1,10 @@
 --Creation of additional columns in the accepted table for easier analysis.
 
+--Unfortunately I did some of this during the cleaning process instead of at the end.
+--This has no bearing on the accuracy of the created columns since they were made after
+--I cleaned the column they were generated from, however, there are inconsistent
+--table names which may reduce clarity.
+
 --Created columns with the dates converted from string to date format
 CREATE OR REPLACE TABLE `cedar-turbine-501913-v0.lend_club.accepted_clean`
 AS
