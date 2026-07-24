@@ -97,3 +97,36 @@ SELECT
 FROM `cedar-turbine-501913-v0.lend_club.accepted_clean_final`
 GROUP BY purpose
 ORDER BY purpose
+
+--Risk by DTI
+CREATE OR REPLACE TABLE `cedar-turbine-501913-v0.lend_club.risk_by_dti` 
+AS
+SELECT
+  dti_band,
+  COUNT(*) as total_loans,
+  ROUND(AVG(default_flag)*100, 2) as default_rate
+FROM `cedar-turbine-501913-v0.lend_club.accepted_clean_final`
+GROUP BY dti_band
+ORDER BY dti_band
+
+--Risk by Employment Length
+CREATE OR REPLACE TABLE `cedar-turbine-501913-v0.lend_club.risk_by_emp_length` 
+AS
+SELECT
+  emp_length,
+  COUNT(*) as total_loans,
+  ROUND(AVG(default_flag)*100, 2) as default_rate
+FROM `cedar-turbine-501913-v0.lend_club.accepted_clean_final`
+GROUP BY emp_length
+ORDER BY emp_length
+
+--Risk by Loan Size
+CREATE OR REPLACE TABLE `cedar-turbine-501913-v0.lend_club.risk_by_loan_size` 
+AS
+SELECT
+  loan_size_band,
+  COUNT(*) as total_loans,
+  ROUND(AVG(default_flag)*100, 2) as default_rate
+FROM `cedar-turbine-501913-v0.lend_club.accepted_clean_final`
+GROUP BY loan_size_band
+ORDER BY loan_size_band
