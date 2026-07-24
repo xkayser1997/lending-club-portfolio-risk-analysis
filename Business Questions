@@ -1,24 +1,15 @@
 **Executive Portfolio Overview**
-What is the total funded volume and growth trend over time?
+What is the total funded volume?
+What is the growth trend over time?
 What is the total funded amount?
-What is the average loan amount?
-What is the average interest rate?
 Which states have the most funded loan volume?
 
 **Credit Risk and Performance**
-What credit tiers have the highest charge off rates?
+What grades have the highest default rates?
 Is there a specific loan type/purpose with higher rates of default?
 Is borrower income related to loan performance?
 Is DTI related to loan performance?
 Is loan amount related to default risk?
-Which states have the highest default rates?
-Are rejected loan patterns in line with credit risk indicators?
-
-**Borrower Profile**
-What income ranges are most common?
-What employment lengths are most common?
-What home ownership types are most common?
-What loan purposes are most popular?
 
 **Pricing Strategy**
 How do interest rates vary by tier?
@@ -31,8 +22,9 @@ Are higher risk borrowers priced for increased risk?
 **Rejected Applications**
 Which states have the most rejected applications?
 What loan amounts are rejected most often?
-Which income ranges are most commonly rejected?
-Which credit tiers are most commonly rejected?
 What DTI ranges are rejected most frequently?
+What loan types are rejected most frequently?
+Does employment length relate to rejections?
+Are rejected loan patterns in line with credit risk indicators? (reference Credit risk and performance)
 
 **Recommendations pending findings**
