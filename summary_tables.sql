@@ -70,8 +70,8 @@ CREATE OR REPLACE TABLE `cedar-turbine-501913-v0.lend_club.risk_KPIs`
 AS
 SELECT
   COUNT(*) AS total_defaults,
-  SUM(funded_amnt)-SUM(total_pymnt)-SUM(recoveries)+SUM(collection_recovery_fee) AS total_lost,
-  AVG(funded_amnt)-AVG(total_pymnt)-AVG(recoveries)+AVG(collection_recovery_fee) AS avg_lost
+  SUM(funded_amnt)-SUM(total_pymnt)+SUM(collection_recovery_fee) AS total_lost,
+  ROUND(AVG(funded_amnt)-AVG(total_pymnt)+AVG(collection_recovery_fee),2) AS avg_lost
 FROM `cedar-turbine-501913-v0.lend_club.accepted_clean_final`
 WHERE loan_outcome = 'Default'
   
@@ -157,3 +157,54 @@ FROM `cedar-turbine-501913-v0.lend_club.accepted_clean_final`
 WHERE loan_outcome = 'Paid'
 GROUP BY grade,term
 ORDER BY grade,term
+
+--Loss by Grade and Term
+CREATE OR REPLACE TABLE `cedar-turbine-501913-v0.lend_club.loss_by_grade`
+AS
+SELECT
+  grade,
+  term,
+  COUNT(*) AS total_defaults,
+  ROUND(AVG(int_rate),2) AS avg_int_rate,
+  SUM(funded_amnt) AS total_funded,
+  (SUM(funded_amnt)-SUM(total_pymnt)+SUM(collection_recovery_fee)) AS total_loss, 
+  ROUND((SUM(funded_amnt)-SUM(total_pymnt)+SUM(collection_recovery_fee))/COUNT(*),2) AS avg_loss,
+  100-ROUND((((SUM(total_pymnt)-SUM(collection_recovery_fee))/SUM(funded_amnt)))*100,2) AS percent_loss
+FROM `cedar-turbine-501913-v0.lend_club.accepted_clean_final`
+WHERE loan_outcome = 'Default'
+GROUP BY grade,term
+ORDER BY grade,term
+
+--Joined these tables after
+CREATE OR REPLACE TABLE `cedar-turbine-501913-v0.lend_club.pricing_strategy`
+AS
+SELECT
+    COALESCE(r.grade, l.grade) AS grade,
+    COALESCE(r.term, l.term) AS term,
+    r.total_loans AS total_paid_loans,
+    l.total_defaults,
+    r.avg_int_rate,
+    r.total_profit,
+    r.avg_profit,
+    r.percent_return,
+    l.total_loss,
+    l.avg_loss,
+    l.percent_loss,
+    -- Net return after losses
+    ROUND(
+        ((r.total_profit - l.total_loss) / (r.total_profit + l.total_loss)) * 100,
+        2
+    ) AS net_return
+FROM `cedar-turbine-501913-v0.lend_club.return_by_grade` r
+FULL OUTER JOIN `cedar-turbine-501913-v0.lend_club.loss_by_grade` l
+ON r.grade = l.grade
+AND r.term = l.term
+ORDER BY grade, term
+
+--Decided to add net profit column as well
+ALTER TABLE cedar-turbine-501913-v0.lend_club.pricing_strategy
+ADD COLUMN net_profit FLOAT64;
+
+UPDATE `cedar-turbine-501913-v0.lend_club.pricing_strategy`
+SET net_profit = total_profit - total_loss
+WHERE grade IS NOT NULL
