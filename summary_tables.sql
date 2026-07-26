@@ -140,3 +140,20 @@ SELECT
 FROM `cedar-turbine-501913-v0.lend_club.accepted_clean_final`
 GROUP BY loan_size_band
 ORDER BY loan_size_band
+
+--Pricing Strategy Analysis
+--Profit by Grade and Term
+CREATE OR REPLACE TABLE `cedar-turbine-501913-v0.lend_club.return_by_grade`
+AS
+SELECT
+  grade,
+  term,
+  COUNT(*) AS total_loans,
+  ROUND(AVG(int_rate),2) AS avg_int_rate,
+  (SUM(total_pymnt)-SUM(funded_amnt)) AS total_profit, 
+  ROUND((SUM(total_pymnt)-SUM(funded_amnt))/COUNT(*),2) AS avg_profit,
+  ROUND(((SUM(total_pymnt)/SUM(funded_amnt))-1)*100,2) AS percent_return
+FROM `cedar-turbine-501913-v0.lend_club.accepted_clean_final`
+WHERE loan_outcome = 'Paid'
+GROUP BY grade,term
+ORDER BY grade,term
