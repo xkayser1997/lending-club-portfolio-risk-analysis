@@ -65,6 +65,16 @@ ORDER BY purpose
 
   
 --Risk Analysis: Risk by Grade. DTI bands, Income bands, Employment Length, Purpose, and Loan Size bands
+--Risk KPIs
+CREATE OR REPLACE TABLE `cedar-turbine-501913-v0.lend_club.risk_KPIs` 
+AS
+SELECT
+  COUNT(*) AS total_defaults,
+  SUM(funded_amnt)-SUM(total_pymnt)-SUM(recoveries)+SUM(collection_recovery_fee) AS total_lost,
+  AVG(funded_amnt)-AVG(total_pymnt)-AVG(recoveries)+AVG(collection_recovery_fee) AS avg_lost
+FROM `cedar-turbine-501913-v0.lend_club.accepted_clean_final`
+WHERE loan_outcome = 'Default'
+  
 --Risk by Grade
 CREATE OR REPLACE TABLE `cedar-turbine-501913-v0.lend_club.risk_by_grade` 
 AS
