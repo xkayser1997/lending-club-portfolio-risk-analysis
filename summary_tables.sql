@@ -208,3 +208,28 @@ ADD COLUMN net_profit FLOAT64;
 UPDATE `cedar-turbine-501913-v0.lend_club.pricing_strategy`
 SET net_profit = total_profit - total_loss
 WHERE grade IS NOT NULL
+
+--Added average loan amount and total loans for analysis
+CREATE OR REPLACE TABLE `cedar-turbine-501913-v0.lend_club.pricing_strategy_updated`
+AS
+SELECT
+    p.*,
+    s.number_of_loans,
+    s.total_loan_amount,
+    s.avg_loan_amount
+FROM `cedar-turbine-501913-v0.lend_club.pricing_strategy` p
+LEFT JOIN (
+    SELECT
+      grade,
+      term,
+      COUNT(*) AS number_of_loans,
+      SUM(loan_amnt) AS total_loan_amount,
+      AVG(loan_amnt) AS avg_loan_amount
+    FROM`cedar-turbine-501913-v0.lend_club.accepted_clean_final`
+    WHERE loan_outcome IN ('Paid','Default')
+    GROUP BY grade,term
+) s
+ON p.grade = s.grade
+AND p.term = s.term
+
+ORDER BY grade,term
