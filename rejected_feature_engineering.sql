@@ -6,16 +6,17 @@ ADD COLUMN requested_amnt_band STRING;
 
 UPDATE `cedar-turbine-501913-v0.lend_club.rejected_clean`
 SET dti_band =
-  CASE
-    WHEN `Debt-To-Income Ratio` IS NULL THEN 'Unknown'
-    WHEN `Debt-To-Income Ratio` < 0 THEN 'Invalid'
-    WHEN `Debt-To-Income Ratio` <= .10 THEN 'Very Low (0-10%)'
-    WHEN `Debt-To-Income Ratio` <= .20 THEN 'Low (10-20%)'
-    WHEN `Debt-To-Income Ratio` <= .30 THEN 'Moderate (20-30%)'
-    WHEN `Debt-To-Income Ratio` <= .40 THEN 'High (30-40%)'
-    WHEN `Debt-To-Income Ratio` <= .50 THEN 'Very High (40-50%)'
+   CASE
+    WHEN `dti_clean` IS NULL THEN 'Unknown'
+    WHEN `dti_clean` < 0 THEN 'Invalid'
+    WHEN `dti_clean` <= .10 THEN 'Very Low (0-10%)'
+    WHEN `dti_clean` <= .20 THEN 'Low (10-20%)'
+    WHEN `dti_clean` <= .30 THEN 'Moderate (20-30%)'
+    WHEN `dti_clean` <= .40 THEN 'High (30-40%)'
+    WHEN `dti_clean` <= .50 THEN 'Very High (40-50%)'
     ELSE '>50%'
   END,
+
 
     requested_amnt_band =
   CASE
