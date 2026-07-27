@@ -1,1 +1,1 @@
-# lending_club_sql
+# lending-club-portfolio-risk-analysis
