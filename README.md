@@ -79,7 +79,7 @@ Provides a high-level summary of the portfolio including:
 ![Executive Dashboard](images/executive_dashboard.png)
 ---
 
-## 2. Credit Risk & Performance
+## 2. Risk Analysis
 
 Evaluates factors associated with loan defaults.
 
@@ -95,7 +95,7 @@ Key analyses include:
 ![Risk Dashboard](images/risk_dashboard.png)
 ---
 
-## 3. Pricing Strategy
+## 3. Risk Based Pricing Performance
 
 Examines whether loan pricing appropriately reflects portfolio risk.
 
