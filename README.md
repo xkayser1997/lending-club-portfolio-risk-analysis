@@ -76,6 +76,7 @@ Provides a high-level summary of the portfolio including:
 - Loan Purpose Distribution
 - Geographic Distribution
 
+![Executive Dashboard](images/executive_dashboard.png)
 ---
 
 ## 2. Credit Risk & Performance
@@ -91,7 +92,7 @@ Key analyses include:
 - Default Rate by Loan Amount
 - Default Rate by Loan Purpose
 
-
+![Risk Dashboard](images/risk_dashboard.png)
 ---
 
 ## 3. Pricing Strategy
@@ -106,7 +107,7 @@ Includes:
 - Net Profit by Grade/Term
 - Net Profit vs Interest Rate
 
-
+![Pricing Dashboard](images/pricing_dashboard.png)
 ---
 
 ## 4. Rejected Applications
@@ -121,6 +122,7 @@ Includes:
 - DTI Distribution
 - Loan Purpose Distribution
 
+![Rejections Dashboard](images/rejections_dashboard.png)
 ---
 
 # SQL Workflow
@@ -154,10 +156,7 @@ Loan-Portfolio-Performance-Risk-Analysis/
 │ ├── Cleaning/
 │ ├── Feature_Engineering/
 │ └── Analysis/
-│
-├── Tableau/
-│ └── Lending_Club_Portfolio_Risk_Analysis.twbx
-│
+|
 ├── Images/
 │ ├── Executive_Dashboard.png
 │ ├── Risk_Dashboard.png
