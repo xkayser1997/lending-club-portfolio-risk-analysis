@@ -152,20 +152,17 @@ Example feature engineering included:
 Loan-Portfolio-Performance-Risk-Analysis/
 │
 ├── README.md
-├── SQL/
+├── business_questions.md
+├── sql/
 │ ├── Cleaning/
 │ ├── Feature_Engineering/
 │ └── Analysis/
 |
-├── Images/
-│ ├── Executive_Dashboard.png
-│ ├── Risk_Dashboard.png
-│ ├── Pricing_Dashboard.png
-│ └── Rejections_Dashboard.png
-│
-└── Documentation/
-├── Data_Dictionary.md
-└── Cleaning_Process.md
+├── images/
+  ├── Executive_Dashboard.png
+  ├── Risk_Dashboard.png
+  ├── Pricing_Dashboard.png
+  └── Rejections_Dashboard.png
 ```
 
 ---
