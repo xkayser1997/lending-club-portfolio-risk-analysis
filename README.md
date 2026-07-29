@@ -9,7 +9,13 @@ The analysis was completed using **Google BigQuery**, **SQL**, and **Tableau**, 
 The goal is to demonstrate an end-to-end analytics workflow, from raw data cleaning through dashboard development, while providing actionable business recommendations that could support lending decisions.
 
 ---
+## Interactive Dashboard
 
+Explore the interactive Tableau dashboard here:
+
+https://public.tableau.com/app/profile/alexander.kayser/viz/LendingClubPortfolioandRiskAnalysis/PortfolioOverview#1
+
+---
 ## Business Problem
 
 Financial institutions must balance profitability with risk when issuing loans.
@@ -36,19 +42,18 @@ This project explores questions such as:
 
 ## Dataset
 
-**Source:** Lending Club Loan Data
+This project analyzes Lending Club's accepted and rejected loan datasets, containing millions of consumer loan applications and funded loans across multiple years. The data was imported into Google BigQuery, where it was cleaned, validated, and transformed into analysis-ready summary tables using SQL before being visualized in Tableau.
 
-The project analyzes both:
+The raw datasets are not included in this repository due to their size. However, they can be downloaded from Kaggle using the link below.
 
-- **Accepted Loan Applications**
-- **Rejected Loan Applications**
+**Dataset Source:** https://www.kaggle.com/datasets/wordsforthewise/lending-club
 
-Rather than directly joining these datasets, they are analyzed independently using shared metrics such as:
+These datasets were not joined since they did not have a key that supported a full join. Instead, they are analyzed independently using common fields such as:
 
 - Loan Amount
 - Debt-to-Income Ratio (DTI)
 - Employment Length
-- Purpose
+- Loan Purpose
 
 ---
 
@@ -169,11 +174,10 @@ Loan-Portfolio-Performance-Risk-Analysis/
 
 # Key Findings
 
-- Higher-risk loan grades generated significantly higher default rates.
-- Loan pricing generally increased with risk grade, although profitability varied substantially.
-- Debt-to-Income ratio showed a meaningful relationship with loan performance.
-- Certain loan purposes displayed higher default rates.
-- Rejected applications displayed risk characteristics similar to the defaults observed in the accepted portfolio.
+- Grades **A–C** generated the majority of portfolio profit, while **Grades E–G** produced net losses despite charging substantially higher average interest rates.
+- Loan grade exhibited the strongest relationship with loan performance among all borrower characteristics analyzed, making it the single most influential predictor of default risk.
+- Default rates increased consistently as borrower credit quality declined, demonstrating that higher interest rates did not fully compensate for the elevated credit risk associated with lower credit grades.
+- Borrowers with high debt-to-income (DTI) ratios experienced noticeably higher default rates, reinforcing DTI as a meaningful predictor of loan performance.
 
 ---
 
@@ -181,11 +185,10 @@ Loan-Portfolio-Performance-Risk-Analysis/
 
 Based on the analysis:
 
-- Continue risk-based pricing while reviewing underperforming loan grades.
-- Strengthen underwriting standards for high-risk borrower segments.
-- Incorporate DTI more heavily into lending decisions.
-- Monitor loan purposes associated with elevated default rates.
-- Use rejected application trends to refine approval strategies and reduce future losses.
+- Continue prioritizing lending within **Grades A–C**, as these segments generated the majority of portfolio profit while maintaining comparatively low default rates.
+- Reevaluate underwriting standards and pricing strategies for **Grades E–G**, where substantially higher interest rates were incapable of offsetting higher credit losses.
+- Incorporate loan grade as the primary driver of risk assessment while using borrower debt-to-income (DTI) as a complementary underwriting metric to improve credit decision-making.
+- Continuously monitor portfolio performance by credit grade and DTI to identify shifts in borrower risk and adjust pricing or approval criteria.
 
 ---
 
@@ -206,14 +209,6 @@ Based on the analysis:
 - Business Intelligence
 - Git
 - GitHub
-
----
-
-# Tableau Dashboard
-
-**Tableau Public:**
-
-https://public.tableau.com/app/profile/alexander.kayser/viz/LendingClubPortfolioandRiskAnalysis/PortfolioOverview#1
 
 ---
 
